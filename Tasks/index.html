@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Task Management Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* small visual helpers */
+    .task-completed { text-decoration: line-through; opacity: .7; }
+  </style>
+</head>
+<body class="bg-slate-50 min-h-screen text-slate-900">
+
+  <div class="max-w-5xl mx-auto px-4 py-8">
+
+    <!-- Header -->
+    <header class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+      <div>
+        <h1 class="text-2xl sm:text-3xl font-bold">Task Management Dashboard</h1>
+      </div>
+    </header>
+
+    <!-- Controls: Form + Filters -->
+    <section class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
+
+      <!-- Add / Create Task Form -->
+      <div class="lg:col-span-2 bg-white rounded-lg shadow p-4">
+        <h2 class="text-lg font-semibold mb-3">Add Task</h2>
+        <form id="taskForm" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <input id="taskName" name="taskName" type="text" required placeholder="Task name (required)"
+            class="col-span-2 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-sky-300" />
+          <input id="dueDate" name="dueDate" type="date"
+            class="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-sky-300" />
+          <div class="sm:col-span-3 flex gap-2">
+            <button type="submit" class="bg-sky-600 text-white px-4 py-2 rounded-md hover:bg-sky-500">Add Task</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Filters & Sort -->
+      <aside class="bg-white rounded-lg shadow p-4">
+        <h3 class="font-medium mb-3">Filter & Sort</h3>
+        <div class="space-y-3">
+          <div>
+            <label class="block text-sm text-slate-700 mb-1">Filter</label>
+            <select id="filter" class="w-full p-2 border rounded-md">
+              <option value="all">All Tasks</option>
+              <option value="pending">Pending</option>
+              <option value="completed">Completed</option>
+            </select>
+          </div>
+
+          <div>
+            <button id="clearAll" class="w-full text-sm text-red-600 hover:underline">Clear All (confirm)</button>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Task list -->
+    <section class="bg-white rounded-lg shadow p-4">
+      <h2 class="text-lg font-semibold mb-4">Tasks</h2>
+
+      <!-- Task container (JS should re-render inside this element) -->
+      <ul id="taskList" class="space-y-3">
+        <!-- Sample Tasks (5) - static for now; replace or manage with JS later -->
+        <li data-id="t1" class="flex items-start sm:items-center justify-between gap-3 p-3 border rounded-md bg-white">
+          <div class="flex items-start gap-3">
+            <input type="checkbox" class="mt-1 task-toggle" aria-label="Mark complete">
+            <div>
+              <div class="task-name font-medium">Prepare project proposal</div>
+              <div class="text-xs text-slate-500 mt-1">Due: <span class="task-due">2025-09-30</span> • <span class="task-status text-xs text-orange-600">Pending</span></div>
+            </div>
+          </div>
+          <div class="flex gap-2 items-center">
+            <button class="edit-btn text-sky-600 text-sm hover:underline">Edit</button>
+            <button class="delete-btn text-rose-600 text-sm hover:underline">Delete</button>
+          </div>
+        </li>
+
+        <li data-id="t2" class="flex items-start sm:items-center justify-between gap-3 p-3 border rounded-md bg-white">
+          <div class="flex items-start gap-3">
+            <input type="checkbox" class="mt-1 task-toggle">
+            <div>
+              <div class="task-name font-medium">Read assignment brief</div>
+              <div class="text-xs text-slate-500 mt-1">Due: <span class="task-due">2025-09-28</span> • <span class="task-status text-xs text-orange-600">Pending</span></div>
+            </div>
+          </div>
+          <div class="flex gap-2 items-center">
+            <button class="edit-btn text-sky-600 text-sm hover:underline">Edit</button>
+            <button class="delete-btn text-rose-600 text-sm hover:underline">Delete</button>
+          </div>
+        </li>
+
+        <li data-id="t3" class="flex items-start sm:items-center justify-between gap-3 p-3 border rounded-md bg-white">
+          <div class="flex items-start gap-3">
+            <input type="checkbox" class="mt-1 task-toggle" checked>
+            <div>
+              <div class="task-name font-medium task-completed">Create wireframes</div>
+              <div class="text-xs text-slate-500 mt-1">Due: <span class="task-due">2025-09-26</span> • <span class="task-status text-xs text-green-600">Completed</span></div>
+            </div>
+          </div>
+          <div class="flex gap-2 items-center">
+            <button class="edit-btn text-sky-600 text-sm hover:underline">Edit</button>
+            <button class="delete-btn text-rose-600 text-sm hover:underline">Delete</button>
+          </div>
+        </li>
+
+        <li data-id="t4" class="flex items-start sm:items-center justify-between gap-3 p-3 border rounded-md bg-white">
+          <div class="flex items-start gap-3">
+            <input type="checkbox" class="mt-1 task-toggle">
+            <div>
+              <div class="task-name font-medium">Implement add task</div>
+              <div class="text-xs text-slate-500 mt-1">Due: <span class="task-due">2025-10-02</span> • <span class="task-status text-xs text-orange-600">Pending</span></div>
+            </div>
+          </div>
+          <div class="flex gap-2 items-center">
+            <button class="edit-btn text-sky-600 text-sm hover:underline">Edit</button>
+            <button class="delete-btn text-rose-600 text-sm hover:underline">Delete</button>
+          </div>
+        </li>
+
+        <li data-id="t5" class="flex items-start sm:items-center justify-between gap-3 p-3 border rounded-md bg-white">
+          <div class="flex items-start gap-3">
+            <input type="checkbox" class="mt-1 task-toggle">
+            <div>
+              <div class="task-name font-medium">Test responsiveness</div>
+              <div class="text-xs text-slate-500 mt-1">Due: <span class="task-due">2025-10-05</span> • <span class="task-status text-xs text-orange-600">Pending</span></div>
+            </div>
+          </div>
+          <div class="flex gap-2 items-center">
+            <button class="edit-btn text-sky-600 text-sm hover:underline">Edit</button>
+            <button class="delete-btn text-rose-600 text-sm hover:underline">Delete</button>
+          </div>
+        </li>
+
+      </ul>
+    </section>
+
+  </div>
+
+</body>
+</html>
