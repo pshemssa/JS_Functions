@@ -1,44 +1,34 @@
-
-
-class student{
-  constructor(id,name,age, email, grades=[]){
-    this.id = id;
-    this.name = name;
-    this.age = age;
-    this.email = email;
-    this.grades = grades;
-
-    
-  }
-   updateGrades( newgrades){
-    
-    this.grades=[...newgrades];
-    return this.grades;
-   }
-
-   avrgGrades(){
-       if (this.grades.length === 0) {
-        return 0;
-       } 
-    let sum = 0;
-      for (let i of this.grades) {
-        sum += i;
-       }
-         let average = sum / this.grades.length;
-    return average;
-   }
-   findStudent(studentid){
-    if(this.id === studentid){
-      return this;
-    }else{
-      return "student not found"
+function addTasks(){
+    let buttonAdd = document.getElementById("addTask");
+    buttonAdd.addEventListener("click", function(event){
+        event.preventDefault();
+        let taskName = document.getElementById("taskName").value;
+        let dueDate = document.getElementById("dueDate").value;
+        if(taskName === "" || dueDate === ""){
+            alert("hello, you forgot something");
+            return;
     }
-    }
+        let taskList = document.getElementById("taskList");
+        let newTask = document.createElement("li");
+        newTask.className = "flex items-start sm:items-center justify-between gap-3 p-3 border rounded-md bg-white";
+        newTask.innerHTML = `
+
+        <div class="flex items-start gap-3">
+            <input type="checkbox" class="mt-1 task-toggle">
+            <div>
+              <div class="task-name font-medium">${taskName}</div>
+              <div class="text-xs text-slate-500 mt-1">Due: ${dueDate} • <span id="status" class="task-status text-xs text-orange-600">Pending</span></div>
+            </div>
+          </div>
+          <div class="flex gap-2 items-center">
+            <button class="edit-btn text-sky-600 text-sm hover:underline">Edit</button>
+            <button class="delete-btn text-rose-600 text-sm hover:underline">Delete</button>
+          </div>
+        `;
+        taskList.appendChild(newTask);
+        document.getElementById("taskForm").reset();
+
 }
-let dex = new student("1","shemssa", "23", "pas@gmail.com", [90,80,70]
-);
-
-console.log(dex)
-console.log(dex.updateGrades([60,80,60]))
-console.log(dex.avrgGrades())
-console.log(dex.findStudent("2"))
+    );
+}
+addTasks();
