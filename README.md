@@ -52,4 +52,47 @@ The project has a simple, beginner-friendly structure and runs in any JavaScript
 ```bash
 git clone https://github.com/pshemssa/JS_Functions.git
 cd JS_Functions
+```
+## 2. Open the Project
+
+Open the folder using any editor:
+
+```bash
+code .
+
+```
+
+## 3. Run the Functions
+
+You can test the JavaScript functions in multiple ways:
+
+▶ Option 1: Run using Node.js
+
+``` bash
+node index.js
+```
+▶ Option 2: Run in Browser
+
+Open index.html in your browser:
+``` bash
+Right click → Open with Browser
+```
+Then open Developer Console to execute the functions.
+
+## Project Structure
+```
+JS_Functions/
+├── index.html       # Simple browser interface
+├── index.js         # Contains all functions
+└── README.md        # Documentation
+
+```
+## Screenshots
+
+<img width="1898" height="888" alt="image" src="https://github.com/user-attachments/assets/450b9183-11f8-455c-b5b7-d6475aedcf86" />
+
+<img width="1896" height="887" alt="image" src="https://github.com/user-attachments/assets/e11cf321-3308-48f5-947b-7c953e025f3d" />
+
+## Live Demo
+
 
